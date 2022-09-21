@@ -34,7 +34,7 @@ body {
     font-family: Helvetica;
 }
 .task-board {
-    background: #6746c3;
+    background: #757de8;
     display: inline-block;
     padding: 12px;
     border-radius: 3px;
@@ -47,7 +47,7 @@ body {
 .status-card {
     width: 250px;
     margin-right: 8px;
-    background: #311b92;
+    background: #3f50b5;
     border-radius: 3px;
     display: inline-block;
     vertical-align: top;
@@ -111,11 +111,19 @@ ul {
 
         <div>
 
-            <form method="post" style="font-size: 1.0em; ">
-
-                enter task content: <input type="text" name="formulario" class= "button" style="width:300px; border-radius: 20px; padding:5px; font-size: 1.1em;" >
-                <input type="submit" name="button1" class="button" value="Add a new task" style="width: 150px; border-radius: 20px; margin-top:10px; font-size: 1.1em;">
-                <a target="_blank" href="https://github.com/vbsx" style="margin-left: 10%; text-align: center; color:#f5f5f5">See my github for futures projects<img src="images/github.png" ></a> 
+            <form method="post" style="font-size: 1.0em; background-color: #002884; padding: 20px">
+                
+                <div >
+                    <input type="text" name="formulario" class= "button" placeholder="enter task content "style="width:300px; border-radius: 20px; padding:5px; font-size: 1.1em;" >
+                    <input type="submit" name="button1" class="button" value="Add a new task" style="width: 150px; border-radius: 20px; font-size: 1.1em;">
+                    <a target="_blank" href="https://github.com/vbsx" style=" position: relative;  color:#f5f5f5; margin-left:4%;">
+                        See my github for futures projects
+                        <img src="images/github.png">
+                    </a>
+                    <form method="post">
+                        <input type="submit" name="button_trash" class="button" value="Clean Trash bin" style="width: 150px; border-radius: 20px; font-size: 1.1em;margin-left: 50px">
+                    </form>
+                </div>
                 <?php
                     
                     if(array_key_exists('button1', $_POST)) {
@@ -133,12 +141,12 @@ ul {
         </div>
 
             <?php
-
+                if(array_key_exists('button_trash', $_POST)) {
+                    empty_trashcan();
+                }           
             foreach ($statusResult as $statusRow) {
 
-                if($statusRow["id"] == 5){
-                    empty_trashcan();
-                }
+
                 $taskResult = $projectManagement->getProjectTaskByStatus($statusRow["id"], $projectName);
                 
                 ?>
